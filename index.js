@@ -76,6 +76,7 @@
 // function bubbleSortTwo(arr){
 //   //start looping from the end of the array (array's length; the example belows array length is 4) to the beginning with a variable call i
 //   for(let i=arr.length; i>0; i--){
+//     console.log(arr[i])
 //     //start an inner loop with a variable called j from the beginning until i-1 (the example blow would end at the second to last index (j<i-1))
 //     for(let j=0; j<i-1; j++){
 //       //if arr[j] is greater than arr[j+1], swap those two values
@@ -95,7 +96,39 @@
 //   return arr;
 // }
 
-// // console.log(bubbleSortTwo([37,45,29,8])); //[ 8, 29, 37, 45 ]
+// function bubbleSortTwo(arr){
+//   let counter = arr.length
+  
+//   while(counter > 0){
+//     for(let j=0; j<counter-1; j++){
+//       //if arr[j] is greater than arr[j+1], swap those two values
+//       if(arr[j] > arr[j+1]){
+        
+//         //ES5 swap
+//         // let temp = arr[j];
+//         // arr[j] = arr[j+1];
+//         // arr[j+1] = temp;
+        
+//         //ES2015 swap
+//         [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+//       }
+//     }
+//     counter--;
+//   }
+//   //return the sorted array
+//   return arr;
+// }
+
+// 0 < 0
+// i= 0
+// j= 0
+
+//[37,45,29,8]
+// i
+//       j
+//         j+1
+
+// console.log(bubbleSortTwo([37,45,29,8])); //[ 8, 29, 37, 45 ]
 // console.log(bubbleSortTwo([37,45,29,8,12,88,-3])); //[-3,  8, 12, 29, 37, 45, 88]
 
 //BubbleSort with swap function:
@@ -129,7 +162,7 @@ function bubbleSortFour(arr){
     noSwaps = true;
     //start an inner loop with a variable called j from the beginning until i-1 (the example blow would end at the second to last index (j<i-1))
     for(let j=0; j<i-1; j++){
-      console.log("ex: ", arr, arr[j], arr[j+1])
+      // console.log("ex: ", arr, arr[j], arr[j+1])
       //if arr[j] is greater than arr[j+1], swap those two values
       if(arr[j] > arr[j+1]){
         
@@ -141,39 +174,64 @@ function bubbleSortFour(arr){
         noSwaps = false;
       }
     }
-    if((noSwaps)) break;
+    if(noSwaps) break;
+    console.log("No swaps made")
   }
   //return the sorted array
   return arr;
 }
-//Time complexity is Linear O(n) due to noSwap optimization
+// //Time complexity is Linear O(n) due to noSwap optimization
 console.log(bubbleSortFour([8,1,2,3,4,5,6,7]));
 
-const found = arr1.filter(num => num === arr2[i])
-            result.push(found);
-            console.log(result)
+//no swaps = false
+// 0 < 8
+// i= 7
+// j= 0
+//[1,8,2,3,4,5,6,7]
+//               i
+//   j j1
 
 
-//Practice leetcode 1122. Relative Sort Array
+// const found = arr1.filter(num => num === arr2[i])
+//             result.push(found);
+//             console.log(result)
+
+// const arr1 = [2,3,1,3,2,4,6,7,9,2,19]
+// const arr2 = [2,1,4,3,9,6]
+// const arr1 = [28,6,22,8,44,17]
+// const arr2 = [22,28,8,6]
+// // Output: [22,28,8,6,17,44]
+// //Practice leetcode 1122. Relative Sort Array
 // var relativeSortArray = function(arr1, arr2) {
 //     const ascending = (num1, num2) =>{
 //         return num1 - num2;
 //     };
-
+//     let segment = [];
 //     let result = [];
-  
+//     // loop through array2
 //     for(let i=0; i<arr2.length; i++){
-//       if(arr1.includes(arr2[i])){
-//         for(let j=0; j<arr1.length; j++){
-//                 if(arr2[i] === arr1[j]){
-//                     result.push(arr1[j]);
-//                 }
-//                 // else{
-//                 //     // arr1.sort(ascending);
-//                 //     result.push(arr1[j]);
-//                 // }
+//       //loop through array1
+//       for(let j=0; j<arr1.length; j++){
+//         //if array1 includes a value of array2
+//         if(arr1.includes(arr2[i])){
+//           //if array2 and array1 are the same
+//           if(arr2[i] === arr1[j]){
+//               //push array1 to result
+//               result.push(arr1[j]);
+//           }
+//         }
+//         //if arr2 does not include in arr1[j] AND segment does not include arr1[j], then push it to segment array
+//         if(!arr2.includes(arr1[j]) && !segment.includes(arr1[j])){
+//           segment.push(arr1[j])
+//           // console.log(segment)
 //         }
 //       }
 //     }
-//     console.log(result)
+//     segment.sort(ascending)
+//   // console.log(segment)
+//   return result.concat(segment);
 // };
+
+
+// // Output: [2,2,2,1,4,3,3,9,6,7,19]
+// console.log(relativeSortArray(arr1, arr2))
