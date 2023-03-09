@@ -23,7 +23,9 @@
 // console.log(["Steele", "Colt", "Data Structures", "Algorithms"].sort(compareByLen));  //[ 'Colt', 'Steele', 'Algorithms', 'Data Structures' ]
 // _______________________________________
 
-//Bubble Sort:
+// Bubble Sort:
+//First places the large values into sorted postion at the end of the array
+
 //-Before we sort, we must swap
 //-Many sorting algorithms involve some type of swapping functionality (eg. swapping two numbers to put them in order)
 //ES5 syntax for swapping:
@@ -96,6 +98,8 @@
 //   return arr;
 // }
 
+
+// Same function as above with while loop (think of outside loop as a counter)
 // function bubbleSortTwo(arr){
 //   let counter = arr.length
   
@@ -131,6 +135,7 @@
 // console.log(bubbleSortTwo([37,45,29,8])); //[ 8, 29, 37, 45 ]
 // console.log(bubbleSortTwo([37,45,29,8,12,88,-3])); //[-3,  8, 12, 29, 37, 45, 88]
 
+
 //BubbleSort with swap function:
 // function bubbleSortThree(arr){
 //   const swap = (arr, idx1, idx2) =>{
@@ -151,37 +156,38 @@
 // // console.log(bubbleSortThree([37,45,29,8])); //[ 8, 29, 37, 45 ]
 // console.log(bubbleSortThree([37,45,29,8,12,88,-3])); //[-3,  8, 12, 29, 37, 45, 88]
 
+
 //Optimized BubbleSort for NEARLY sorted arrays:
 //this function avoids comparing things that are already sorted
-function bubbleSortFour(arr){
-  //set a no swaps variable that changes based on where we are at in the code
-  let noSwaps;
-  //start looping from the end of the array (array's length; the example belows array length is 4) to the beginning with a variable call i
-  for(let i=arr.length; i>0; i--){
-    //original loop so no swaps have been done yet, so set to true
-    noSwaps = true;
-    //start an inner loop with a variable called j from the beginning until i-1 (the example blow would end at the second to last index (j<i-1))
-    for(let j=0; j<i-1; j++){
-      // console.log("ex: ", arr, arr[j], arr[j+1])
-      //if arr[j] is greater than arr[j+1], swap those two values
-      if(arr[j] > arr[j+1]){
+// function bubbleSortFour(arr){
+//   //set a no swaps variable that changes based on where we are at in the code
+//   let noSwaps;
+//   //start looping from the end of the array (array's length; the example belows array length is 4) to the beginning with a variable call i
+//   for(let i=arr.length; i>0; i--){
+//     //original loop so no swaps have been done yet, so set to true
+//     noSwaps = true;
+//     //start an inner loop with a variable called j from the beginning until i-1 (the example blow would end at the second to last index (j<i-1))
+//     for(let j=0; j<i-1; j++){
+//       // console.log("ex: ", arr, arr[j], arr[j+1])
+//       //if arr[j] is greater than arr[j+1], swap those two values
+//       if(arr[j] > arr[j+1]){
         
-        //ES5 swap
-        let temp = arr[j];
-        arr[j] = arr[j+1];
-        arr[j+1] = temp;
-        //swaps happening here, so set to false
-        noSwaps = false;
-      }
-    }
-    if(noSwaps) break;
-    console.log("No swaps made")
-  }
-  //return the sorted array
-  return arr;
-}
-// //Time complexity is Linear O(n) due to noSwap optimization
-console.log(bubbleSortFour([8,1,2,3,4,5,6,7]));
+//         //ES5 swap
+//         let temp = arr[j];
+//         arr[j] = arr[j+1];
+//         arr[j+1] = temp;
+//         //swaps happening here, so set to false
+//         noSwaps = false;
+//       }
+//     }
+//     if(noSwaps) break;
+//     // console.log("No swaps made")
+//   }
+//   //return the sorted array
+//   return arr;
+// }
+// // //Time complexity is Linear O(n) due to noSwap optimization
+// console.log(bubbleSortFour([8,1,2,3,4,5,6,7]));
 
 //no swaps = false
 // 0 < 8
@@ -191,17 +197,17 @@ console.log(bubbleSortFour([8,1,2,3,4,5,6,7]));
 //               i
 //   j j1
 
+// _____________________________________
 
-// const found = arr1.filter(num => num === arr2[i])
-//             result.push(found);
-//             console.log(result)
-
+//Practice leetcode 1122. Relative Sort Array:
 // const arr1 = [2,3,1,3,2,4,6,7,9,2,19]
 // const arr2 = [2,1,4,3,9,6]
+// Output: [2,2,2,1,4,3,3,9,6,7,19]
+
 // const arr1 = [28,6,22,8,44,17]
 // const arr2 = [22,28,8,6]
-// // Output: [22,28,8,6,17,44]
-// //Practice leetcode 1122. Relative Sort Array
+// Output: [22,28,8,6,17,44]
+
 // var relativeSortArray = function(arr1, arr2) {
 //     const ascending = (num1, num2) =>{
 //         return num1 - num2;
@@ -232,6 +238,63 @@ console.log(bubbleSortFour([8,1,2,3,4,5,6,7]));
 //   return result.concat(segment);
 // };
 
-
-// // Output: [2,2,2,1,4,3,3,9,6,7,19]
 // console.log(relativeSortArray(arr1, arr2))
+
+
+// Selection Sort:
+//Place small values into sorted position one at a time.  We still move from the beginning to the end but the actual sorted data is accumulating at the beginning.
+//Only one situation where selection sort is better than bubble sort.  If you want to minimize the number of swaps you're making.  There's only one swap at the end of each loop.
+
+// function selectionSort(array){
+//   for(let i=0; i<array.length; i++){
+//     //store the first element as the smallest value you've see so far
+//     let min = i;
+//     //compare this item to the next item in the array until you find a smaller number
+//     for(let j=i+1; j<array.length; j++){
+//       //if a smaller number is found, designate that smaller number to be the new "minimun" and continue until the end of the array
+//       // console.log(i,j)
+//       if(array[j] < array[min]){
+//         min = j;
+//       }
+//     }
+//     //if the "minimum" is not equal to the value (index) you initially began with, swap the two values.
+//     if(min !== i){
+//       // console.log("before swap: ",array)
+//       let temp = array[i];
+//       array[i] = array[min];
+//       array[min] = temp;
+//       // console.log("after swap",array)
+//     }
+    
+//   }
+//   return array;
+// }
+// console.log(selectionSort([34,22,10,19,17]))
+
+
+//same function with ES2015 syntax:
+function selectionSortTwo(array){
+  const swap = (arr, idx1, idx2) =>{
+    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+  }
+  
+  for(let i=0; i<array.length; i++){
+    //store the first element as the smallest value you've see so far (store the index)
+    let min = i;
+    //compare this item to the next item in the array until you find a smaller number
+    for(let j=i+1; j<array.length; j++){
+      //if a smaller number is found, designate that smaller number to be the new "minimun" and continue until the end of the array
+      // console.log(i,j)
+      if(array[j] < array[min]){
+        min = j;
+      }
+    }
+    //if the "minimum" is not equal to the current index, swap them
+    // console.log("before swap: ",array)
+    if(min !== i) swap(array, i, min);
+    // console.log("after swap",array)
+  }
+  return array;
+}
+console.log(selectionSortTwo([34,22,10,19,17]))
+//Big O: Time complexity O(n^2) Quadratic time
