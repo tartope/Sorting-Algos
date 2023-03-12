@@ -273,28 +273,100 @@
 
 
 //same function with ES2015 syntax:
-function selectionSortTwo(array){
-  const swap = (arr, idx1, idx2) =>{
-    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-  }
+// function selectionSortTwo(array){
+//   const swap = (arr, idx1, idx2) =>{
+//     [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+//   }
   
-  for(let i=0; i<array.length; i++){
-    //store the first element as the smallest value you've see so far (store the index)
-    let min = i;
-    //compare this item to the next item in the array until you find a smaller number
-    for(let j=i+1; j<array.length; j++){
-      //if a smaller number is found, designate that smaller number to be the new "minimun" and continue until the end of the array
-      // console.log(i,j)
-      if(array[j] < array[min]){
-        min = j;
-      }
-    }
-    //if the "minimum" is not equal to the current index, swap them
-    // console.log("before swap: ",array)
-    if(min !== i) swap(array, i, min);
-    // console.log("after swap",array)
-  }
-  return array;
-}
-console.log(selectionSortTwo([34,22,10,19,17]))
+//   for(let i=0; i<array.length; i++){
+//     //store the first element as the smallest value you've see so far (store the index)
+//     let min = i;
+//     //compare this item to the next item in the array until you find a smaller number
+//     for(let j=i+1; j<array.length; j++){
+//       //if a smaller number is found, designate that smaller number to be the new "minimun" and continue until the end of the array
+//       // console.log(i,j)
+//       if(array[j] < array[min]){
+//         min = j;
+//       }
+//     }
+//     //if the "minimum" is not equal to the current index, swap them
+//     // console.log("before swap: ",array)
+//     if(min !== i) swap(array, i, min);
+//     // console.log("after swap",array)
+//   }
+//   return array;
+// }
+// console.log(selectionSortTwo([34,22,10,19,17]))
 //Big O: Time complexity O(n^2) Quadratic time
+// ___________________________________________
+
+//Practice leetcode 1636. Sort Array by Increasing Frequency:
+
+// var frequencySort = function(nums) {
+//   //edge case: if array length is 1, return array
+//   if(nums.length === 1) return nums;
+
+//   //create a map of each number and it's frequency 
+//   const map = {};
+//   //create result to return at end
+//   let result = [];
+//   //create segment to store
+//   let segment = [];
+
+//   //loop through array
+//   for(let i=0; i<nums.length; i++){
+//       //if map doesn't have number:freq, store number and set frequency to 1
+//       if(!map[nums[i]]){
+//           map[nums[i]] = 1;
+//       //else increment value of number
+//       }else{
+//           map[nums[i]]++;
+//       }
+//   }
+//   //keys are listed as strings not numbers
+//   // console.log(map)
+
+//   //set freq value to 1
+//   let freqValue = 1;
+//   //while freq value is less than or equal to array length
+//   while(freqValue <= nums.length){
+//     //loop through map
+//     for(let num in map){
+//       // console.log(num)
+//       //if current number value is equal to freq value
+//       if(map[num] === freqValue){
+//         //while current numbers value is greater than 0
+//         while(map[num] > 0){
+//           //push the number(as an int) to segment
+//           segment.push(parseInt(num));
+//           //decrement the value of the current number and begin inner while loop again
+//           map[num]--;
+//         }
+//       }
+//     }
+//     //when the for loop is over, sort segment in descending order
+//     segment.sort((a,b)=> b-a);
+//     //concatinate result and segment
+//     result = result.concat(segment);
+//     //reset segment to empty array
+//     segment = [];
+//     //increment freq value and begin outer while loop again
+//     freqValue++;
+//   }
+//   return result;
+// };
+
+//map = { '1': 0, '4': 0, '5': 0, '-1': 0, '-6': 0 }
+//         c
+//result = [5,-1,4,4,-6,-6,1,1,1]
+//segment = []
+//freqValue =10   <=  nums length =9
+
+// console.log(frequencySort([-1,1,-6,4,5,-6,1,4,1]));  //nums length=9
+// Input: nums = [1,1,2,2,2,3]
+// Output: [3,1,1,2,2,2]
+// Explanation: '3' has a frequency of 1, '1' has a frequency of 2, and '2' has a frequency of 3.
+
+// Input: nums = [-1,1,-6,4,5,-6,1,4,1]
+// Output: [5,-1,4,4,-6,-6,1,1,1]
+// ____________________________________________
