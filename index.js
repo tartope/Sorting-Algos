@@ -239,7 +239,7 @@
 // };
 
 // console.log(relativeSortArray(arr1, arr2))
-
+// ____________________________________________
 
 // Selection Sort:
 //Place small values into sorted position one at a time.  We still move from the beginning to the end but the actual sorted data is accumulating at the beginning.
@@ -370,3 +370,34 @@
 // Input: nums = [-1,1,-6,4,5,-6,1,4,1]
 // Output: [5,-1,4,4,-6,-6,1,1,1]
 // ____________________________________________
+
+// Insertion Sort:
+// It builds up the sort by gradually creating a larger left half which is always sorted.
+// It takes an element one at a time and inserts it into the correct spot.
+
+function insertionSort(array){
+  //start by picking the second element in the array (the first element is considered sorted)
+  for(let i=1; i<array.length; i++){
+    //grab that element in a variable (like a temp variable for swapping)
+    let currentVal = array[i];
+    //compare the second element(currentVal) with the one before it (array[j]) and swap if necessary
+    //continue to the next element and if it's in the incorrect order, iterate through the sorted portion (ie. the left side) to place the element in the correct place
+    //start j as the element before i; as long as j(index)>=0 AND array[j] > currentVal; decrement j
+    for(var j=i-1; j>=0 && array[j] > currentVal; j--){
+      //replace array[j+1] with array[j]
+      array[j+1] = array[j];
+    }
+    //(on its second loop j(index) becomes -1, so j+1 is the first index); 
+    //or set array[j+1] to currentVal
+    array[j+1] = currentVal;
+  }
+  return array;
+}
+console.log(insertionSort([2,1,9,76,4]));
+//Big O: worst case is O(n^2) quadratic
+
+//currentVal = 4
+//  0  1 2  3  4
+//  [1,2,4,9,76]
+//              i
+//     j     
